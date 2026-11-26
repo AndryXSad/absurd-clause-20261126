@@ -22,12 +22,18 @@ ENTRY = (
 )
 
 
-def main() -> None:
-    output_dir = os.environ.get("MAKEFUN_OUTPUT_DIR") or "/output"
+def write_entry(output_dir: str) -> str:
+    """Write the clause to entry.txt in output_dir; return the path."""
     os.makedirs(output_dir, exist_ok=True)
     path = os.path.join(output_dir, "entry.txt")
     with open(path, "w", encoding="utf-8", newline="") as f:
         f.write(ENTRY)
+    return path
+
+
+def main() -> None:
+    output_dir = os.environ.get("MAKEFUN_OUTPUT_DIR") or "/output"
+    write_entry(output_dir)
 
 
 if __name__ == "__main__":
